@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RouteVista India | Smart Travel Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>RouteVista India</h1>
+      <p class="tagline">Plan routes across India with AI-powered travel comparisons in ₹.</p>
+    </div>
+    <div class="auth-panel">
+      <button id="googleLoginBtn">Google Sign-in</button>
+      <button id="logoutBtn" class="hidden">Logout</button>
+      <span id="userInfo">Guest mode</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-card" aria-label="Route search">
+      <h2>Where do you want to go?</h2>
+      <form id="routeForm">
+        <label for="from">From</label>
+        <input id="from" name="from" required placeholder="e.g., Bengaluru" />
+
+        <label for="to">To</label>
+        <input id="to" name="to" required placeholder="e.g., Goa" />
+
+        <button type="submit">Search Routes</button>
+      </form>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="layout-grid">
+      <div>
+        <div id="map" aria-label="Route map"></div>
+        <div class="panel route-suggestions">
+          <h3>Route Viewpoints & Nearby Places</h3>
+          <div id="suggestions"></div>
+        </div>
+      </div>
+
+      <div class="panel tabs-panel">
+        <div class="tabs" role="tablist" aria-label="Travel panels">
+          <button class="tab-btn active" data-tab="ai" role="tab" aria-selected="true">AI Recommendations</button>
+          <button class="tab-btn" data-tab="compare" role="tab" aria-selected="false">Comparison</button>
+          <button class="tab-btn" data-tab="hotels" role="tab" aria-selected="false">Hotels</button>
+          <button class="tab-btn" data-tab="restaurants" role="tab" aria-selected="false">Restaurants</button>
+          <button class="tab-btn" data-tab="reviews" role="tab" aria-selected="false">Reviews</button>
+        </div>
+
+        <section id="tab-ai" class="tab-content active" role="tabpanel">
+          <h3>AI Travel Recommendations</h3>
+          <div id="aiCards" class="card-grid"></div>
+        </section>
+
+        <section id="tab-compare" class="tab-content" role="tabpanel">
+          <h3>Transport Comparison</h3>
+          <div id="comparisonTable"></div>
+        </section>
+
+        <section id="tab-hotels" class="tab-content" role="tabpanel">
+          <h3>Hotels Near Destination</h3>
+          <div id="hotelsList" class="card-grid"></div>
+        </section>
+
+        <section id="tab-restaurants" class="tab-content" role="tabpanel">
+          <h3>Restaurants You Can Try</h3>
+          <div id="restaurantsList" class="card-grid"></div>
+        </section>
+
+        <section id="tab-reviews" class="tab-content" role="tabpanel">
+          <h3>User Reviews & Ratings</h3>
+          <form id="reviewForm">
+            <input id="reviewProvider" placeholder="Provider (e.g. Vande Bharat)" required />
+            <input id="reviewRating" type="number" min="1" max="5" required placeholder="Rating 1-5" />
+            <textarea id="reviewComment" required placeholder="Share your travel experience"></textarea>
+            <input id="reviewPhoto" type="file" accept="image/*" />
+            <button type="submit">Add Review</button>
+          </form>
+          <div id="reviewsList"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
